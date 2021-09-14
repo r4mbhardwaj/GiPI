@@ -1,0 +1,14 @@
+<div class="card">
+    <a href="/project/{{project.name}}/">
+    <div class="card-content">
+        <div>
+            <span class="left">{{project.name}}</span>
+            <span class="right">{{project.released_on.date}}</span>
+        </div>
+        <br>
+        <p>
+            {{project.description|truncatewords:'10'}}
+        </p>
+    </div>
+    </a>
+</div>

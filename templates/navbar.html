@@ -1,0 +1,53 @@
+<header>
+    <div class='navbar-fixed'>
+        <nav class='scale-transition scale-in' style="background-color:">
+            <div class="nav-wrapper container">
+                <a href="{% block brand_logo_url %}/{% endblock brand_logo_url %}" class="brand-logo waves-effect waves-light">8D Music Label</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav {% block sidenav %}sidenav-fixed{% endblock sidenav %}" id="mobile-demo">
+      <li>
+          {% if user.is_authenticated %}
+          <div class="user-view center">
+                  <div class="row">
+                      <div class="col s3"></div>
+                          <div class="col s6">
+                              <a href="/profile/"><div class="ratio waves-effect img-responsive img-circle container" style="background-image:url('{% if user.profile.first.get_profile_picture %}{{user.profile.first.get_profile_picture}}{% else %}/static/no_image.jpg{% endif %}');"></div></a>
+                          </div>
+                      <div class="col s3"></div>
+                  </div>
+              <a><span class="name"><strong>{{user.get_full_name}}</strong></span></a>
+              <a><span class="email grey-text">@{{user.username}}</span></a>
+          </div>
+          {% else %}
+          <div class="row center">
+              <div class="col s3"></div>
+                  <div class="col s6">
+                      <div class="ratio waves-effect img-responsive img-circle container" style="background-image:url('https://sidtu.be/static/logo.png');"></div>
+                  </div>
+              <div class="col s3"></div>
+          </div>
+          {% endif %}
+      </li>
+      <li><a class="" href="/"><i class="material-icons ">home</i>Home</a></li>
+      {% if user.is_authenticated %}
+      {% if user.is_superuser %}
+          <li><a class="" href="/admin/"><i class="material-icons ">supervisor_account</i>Admin</a></li>
+          {% endif %}
+          <li><a class="" href="/profile/"><i class="material-icons">account_box</i>Profile</a></li>
+          <li><a class="" href="/profile/"><i class="material-icons">code</i>Your Projects</a></li>
+          <li><a class="" href="/profile/"><i class="material-icons">settings</i>Account Settings</a></li>
+          <li><a class="" href="/inbox/notifications/unread/"><i class="material-icons ">notifications</i>Notifications
+              {% if unread_count %}
+              <span class="new badge">{{unread_count}}</span>
+          {% endif %}
+          </a></li>
+          <li><a class="" href="/accounts/logout/"><i class="material-icons ">logout</i>logout</a></li>
+          {% else %}
+          <li><a class="" href="/accounts/login/"><i class="material-icons ">login</i>login</a></li>
+          <li><a class=" " href="/accounts/signup/"><i class="material-icons ">person_add</i>register</a></li>
+          {% endif %}
+  </ul>
+  </header>

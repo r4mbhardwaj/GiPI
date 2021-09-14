@@ -1,0 +1,224 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.js" integrity="sha512-/CzcPLOqUndTJKlWJ+PkvFh2ETRtkrnxwmULr9LsUU+cFLl7TAOR5gwwD8DRLvtM4h5ke/GQknlqQbWuT9BKdA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-5QJHCJP"></script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NQFM477');</script>
+    
+        
+    <title>{{title}}{% block title %}{% block head_title %}{% endblock %}{% endblock %}</title>
+    <meta name="google-signin-client_id" content="961201935720-k2qnr5hjuumgrq6dpfi42lhv3n299t31.apps.googleusercontent.com">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://sidtu.be/static/dark_theme.css">
+    <!-- <link rel="stylesheet" href="https://sidtu.be/static/light_theme.css"> -->
+    <meta name="description" content="{% block meta_desc %}SidTube - Connect With The People From Anywhere In The World!{% endblock meta_desc %}">
+    <meta name="google-site-verification" content="sOLdFSdUrC0r_zTOqvQ2VvkgC5evlCAyv7WUA1AJ31g" />
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://sidtu.be/static/voices.js"></script>
+    <link rel="shortcut icon" href="https://sidtu.be/static/logo.png">
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
+    {% block pagetags %}{% endblock pagetags %}
+    <meta property="og:title" content="{{title}}{% block og_title %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_desc %}{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}/static/sidtube.png{% endblock %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    {% block stylesheet %}{% endblock %}
+</head>
+
+<body style="" class=''>
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQFM477" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->  
+
+{% include 'navbar.html' %}
+
+     <main id="main" class="">{% block body %}{% endblock body %}</main>
+    {% block footer %}
+    <!-- {% include 'footer.html' %} -->
+    <style>
+          body {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+
+            main {
+                flex: 1 0 auto;
+            }
+    </style>
+    {% endblock footer %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% block javascript %}{% endblock %}
+    {% if messages %}
+    <script type="text/javascript">
+        {% for message in messages %}
+        {
+            M.toast({ html: '{{message}}' })
+        }
+        {% endfor %}
+    </script>
+    {% endif %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177314678-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-177314678-1');
+    </script>
+    <script>
+mic = document.getElementById("mic")
+    function startSearchDictation() {
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+    
+        var recognition = new webkitSpeechRecognition();
+    
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = "en-US";
+        
+        mic.classList.add('pulse')
+        recognition.start();
+        recognition.onresult = function (e) {
+            document.getElementById('autocomplete').value = e.results[0][0].transcript;
+            recognition.stop();
+            mic.classList.remove('pulse')
+            document.getElementById('search_form').submit();
+        };
+        recognition.onerror = function(e) {
+            recognition.stop();
+            mic.classList.remove('pulse')
+        }
+        }
+    }
+    </script>
+      <script>
+        {% for field in form %}
+            {% for error in field.errors %}
+            {
+              M.toast({ html: '{{ error|escape }}' })
+            }
+            {% endfor %}
+        {% endfor %}
+      </script>
+<style>
+{% block sidenav_css %}
+header, main, footer {
+      padding-left: 300px;
+    }
+
+    .search {
+        padding-right: 300px;
+      }
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+      .search {
+        padding-right: 0;
+      }
+    }
+{% endblock sidenav_css %}
+    ::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: #1976d2;
+}
+
+::selection {
+  color: white;
+  background: #1976d2;
+}
+</style>
+<script>
+function copytext(copyText) {
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    M.toast({ html: 'Link Copied to Clipboard!' })
+}
+</script>
+
+
+<script>
+  ta = document.getElementsByTagName('textarea')
+for (var i = 0; i < ta.length; i++){
+var e = ta[i];
+e.classList.add('materialize-textarea')
+}
+
+btns = document.getElementsByTagName('button')
+for (var i = 0; i < btns.length; i++){
+var e = btns[i];
+e.classList.add('btn')
+e.classList.add('waves-effect')
+}
+
+input_buttons = document.querySelectorAll('input[type=submit]')
+for (var i = 0; i < input_buttons.length; i++){
+var e = input_buttons[i];
+e.classList.add('btn')
+e.classList.add('waves-effect')
+}
+</script>
+
+<style>
+    :root {
+        /* color-scheme: dark; */
+      --plyr-color-main: #1976d2;
+    }
+  
+    .plyr__controls {
+      background: url(/static/sidtube_logo.png)100% 70% no-repeat, linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)) !important;
+      background-size: 15% auto, auto !important
+    }
+  </style>
+  
+  <script>
+    var players = document.querySelectorAll('.plyr-player');
+    players.forEach(function (e){
+      new Plyr(e);
+    });
+  </script>
+  <style>
+#nprogress .bar {
+  background: #4fa5fa !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #2d8ded, 0 0 5px #207edc;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #1976d2;
+  border-left-color: #1976d2;
+}
+
+  </style>
+<style>
+  .tabs .indicator{background-color:#1976d2}.caption div{box-shadow:0 0 5px #161616;transition:all .3s ease 0s}.img-circle{border-radius:50%}.img-circle{border-radius:0}.ratio{background-position:center center;background-repeat:no-repeat;background-size:cover;height:0;padding-bottom:100%;position:relative;width:100%}.img-circle{border-radius:50%}.img-responsive{display:block;height:auto;max-width:100%}
+</style>
+<!-- <script src="https://sidtu.be/static/main/main.js"></script> -->
+<script src="https://sidtu.be/static/turbolinks/turbolinks.js"></script>
+<!-- <link rel="stylesheet" href="https://sidtu.be/static/main/forms.css" /> -->
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+  M.AutoInit();
+</script>
+</body>
+</html>

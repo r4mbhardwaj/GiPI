@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
+from django.dispatch import receiver
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
     # instance is the self Release model, I can access the Release model by it!
-    return 'packages/user_{0}/{1}/release_{2}/{3}'.format(instance.author.id, instance.project.id, instance.id, filename)
+    return 'packages/user_{0}/{1}/release_{2}/{3}'.format(instance.author.id, instance.project.id, instance.name, filename)
 
 class Project(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -13,6 +14,7 @@ class Project(models.Model):
     url = models.URLField()
     requirements = models.TextField()
     released_on = models.DateTimeField(auto_now_add=True)
+    private = models.BooleanField(default=True)
     def __str__(self):
         return self.name
 

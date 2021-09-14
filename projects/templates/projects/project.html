@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{project.name}}{% endblock title %}
+
+{% block body %}
+<script defer="" src="https://sidtu.be/static/blog/prism.js" type="text/javascript"></script>
+<link href="https://sidtu.be/static/blog/prism.css" rel="stylesheet">
+
+<div class="container">
+    {% with latest=project.releases.last %}
+    <div class="row">
+        <div class="col s12 m6 left">
+            <p class="flow-text">{{project}} {{latest.name}}</p>
+            <pre class="language-markup"><code>gideon install wishme</code></pre>
+        </div>
+        <div class="col s12 m6 right">
+            <br>
+            <a href="" class="waves-effect waves-light btn">latest version</a>
+            <p class="">Released: {{project.released_on}}</p>
+        </div>
+    </div>
+    {% endwith %}
+</div>
+{% endblock body %}

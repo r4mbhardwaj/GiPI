@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="section">
+    <div class="row container">
+        {% include 'UI/search_form.html' %}
+    </div>
+</div>
+<div class="section">
+    <div class="row container">
+        {% for project in projects %}
+            {% include 'UI/project_card.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
